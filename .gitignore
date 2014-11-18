@@ -1,1 +1,10 @@
-*/compiled/
+compiled
+*.png
+*~
+\#*
+*\.swp
+
+
+
+max
+output

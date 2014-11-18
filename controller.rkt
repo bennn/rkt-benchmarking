@@ -5,6 +5,7 @@
 ; http://pkg-build.racket-lang.org/doc/benchmark/index.html
 
 (require benchmark
+         ;; contract-profile
          plot
          racket
          racket/runtime-path)
@@ -14,12 +15,18 @@
     ; file to run
     paths
     ; list of options
-    (list (list 'jit 'no-jit))
+    (list
+        (list 'jit 'no-jit)
+        ;; (list 'jit 'no-jit 'jc 'njc)
+        ;; (list 'jc 'njc)
+    )
     ; how to run each benchmark
     (lambda (file jit)
-      (if (equal? jit 'jit)
-        (system* (find-executable-path "racket") file)
-        (system* (find-executable-path "racket") "-j" file)))
+      (cond [(equal? jit 'jit)    (system* (find-executable-path "racket") file)]
+            [(equal? jit 'no-jit) (system* (find-executable-path "racket") "-j" file)]
+            ;; [(equal? jit 'jc)      (contract-profile (system* (find-executable-path "racket") file))]
+            ;; [(equal? jit 'njc)    (contract-profile (system* (find-executable-path "racket") "-j" file))]
+      ))
     #:build
     (lambda (file jit)
       (system* (find-executable-path "raco") "make" file))
@@ -36,12 +43,14 @@
     (plot;-pict
      #:title "jit vs no-jit"
      #:x-label #f
-     #:y-label "normalized-time"
+     #:y-label "time"
      #:out-file "output.png"
      (render-benchmark-alts
       ; default options
       (list 'jit)
       results))))
 
-(make-plot (make-results
-       (map string->path (vector->list (current-command-line-arguments)))))
+(make-plot 
+    (make-results
+       (map string->path (vector->list (current-command-line-arguments))))
+)

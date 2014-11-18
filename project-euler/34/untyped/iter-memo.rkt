@@ -25,5 +25,5 @@
   (for/sum ([i (in-range 10 limit)])
     (if (= i (fact-sum i)) i 0)))
 
-;; (time (run 9000000))
-(time (run 900))
+(time (run 9000000))
+;; (time (run 900))
