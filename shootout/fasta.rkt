@@ -159,5 +159,4 @@
                 (random-fasta ">TWO IUB ambiguity codes\n" (* n 3) IUB 42))
   (void))
 
-; (main 100000000)
-(time (begin (main 10) (void)))
+(time (begin (main 100000000) (void)))
