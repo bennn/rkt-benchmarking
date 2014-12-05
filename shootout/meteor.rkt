@@ -253,5 +253,4 @@
     ;; (print-solution (mcar solutions))
     ;; (print-solution (mcdr solutions)))
 
-(time (begin (main "20") (void)))
-; (time (begin (main "200000") (void)))
+(time (begin (main "200000") (void)))
