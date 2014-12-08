@@ -1,3 +1,15 @@
+Acquire
+=======
+
+Port of http://github.com/mfelleisen/Acquire
+
+Execute `racket run-test.rkt` to run a single game between AI opponents.
+Output is the CPU time taken.
+
+---
+
+(Below is the original README file)
+
 ================================================================================
 This directory contains the Racket code base for the variant of the Acquire
 board game that was used as the theme of "Software Construction" at NU PRL
