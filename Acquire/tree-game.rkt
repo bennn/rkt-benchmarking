@@ -20,7 +20,7 @@
   (define p1 (random-players 5))
   (define p (cons extra p1))
   (define-values (two-status _score two-run) (run p 99 #:choice randomly-pick))
-  (displayln `(,(length two-run) ,two-status)))
+  (void)) ; (format `(,(length two-run) ,two-status)))
 
 (define (run players turns# #:show (show values #;(show)) #:choice (choose-next-tile first))
   (define a (new administrator% (next-tile choose-next-tile)))
