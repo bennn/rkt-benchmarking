@@ -1,5 +1,7 @@
 #lang racket/gui
 
+(provide main)
+
 ;; ---------------------------------------------------------------------------------------------------
 ;; IMPLEMENTATION
 
@@ -11,7 +13,7 @@
 (module+ test (require rackunit))
 
 (define (main n)
-  (for ((i (in-range (string->number n))))
+  (for ((i (in-range n)))
     (go (inf-loop-player 0))))
 
 (define (go extra)
@@ -62,5 +64,3 @@
   (go (inform-bad-player))
   (go (setup-bad-player))
   (go (inf-loop-player 1)))
-
-(time (main "2"))
