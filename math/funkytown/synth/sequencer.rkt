@@ -1,6 +1,8 @@
 #lang racket
 
-(require "math/array.rkt"
+(require (only-in "math/array.rkt"
+                  build-array
+                  array-append*)
          "synth.rkt" "mixer.rkt")
 
 (provide scale chord note sequence mix)

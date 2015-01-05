@@ -1,6 +1,9 @@
 #lang racket
 
-(require "math/array.rkt")
+(require (only-in "math/array.rkt"
+                  array-size
+                  array-strictness
+                  in-array))
 
 (require "wav-encode.rkt") ;; TODO does not accept arrays directly
 

@@ -1,6 +1,8 @@
 #lang racket
 
-(require "math/array.rkt")
+(require (only-in "math/array.rkt"
+                  array-broadcasting
+                  array-map))
 
 (provide mix)
 

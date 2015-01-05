@@ -13,12 +13,12 @@
                                        -> (Array A)))]
  [array-reshape    (All (A) ((Array A) (Vectorof Integer) -> (Array A)))])
 
-(provide array-transform
-         unsafe-array-transform
-         array-axis-permute
-         array-axis-swap
-         array-axis-insert
-         array-axis-ref
-         array-reshape
-         array-flatten
-         array-append*)
+(provide array-append*
+ array-transform
+ unsafe-array-transform
+ array-axis-permute
+ array-axis-swap
+ array-axis-insert
+ array-axis-ref
+ array-reshape
+ array-flatten)
