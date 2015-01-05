@@ -1,5 +1,7 @@
 #lang racket
 
+(require contract-profile)
+
 (define (sift n st)
   ;; remove all multiples of n from st
   (cond [(stream-empty? st) empty-stream]
@@ -28,4 +30,5 @@
         n
         #f)))
 
-(time (run 10000))
+(define (main) (time (run 10000)))
+(contract-profile-thunk main)

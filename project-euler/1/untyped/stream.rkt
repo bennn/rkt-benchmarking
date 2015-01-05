@@ -16,4 +16,5 @@
   (define merged (stream-merge-unique-ints threes fives))
   (stream-fold + 0 merged))
 
-(time (get-answer 1000))
+(define (main) (get-answer 1000))
+(time (begin (main) (void)))
