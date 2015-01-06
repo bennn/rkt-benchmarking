@@ -1,24 +1,11 @@
 #lang racket/base
 
-(require typed/untyped-utils)
-
+(require (only-in typed/untyped-utils require/untyped-contract))
 (require/untyped-contract
- (begin (require "array-struct.rkt")
-        (require "utils.rkt"))
+ (begin (require   (only-in "array-struct.rkt" Array)
+                   (only-in typed/racket/base Index Vectorof)
+                   ))
  "typed-array-constructors.rkt"
- [make-array        (All (A) ((Vectorof Integer) A -> (Array A)))]
- [axis-index-array  ((Vectorof Integer) Integer -> (Array Index))]
- [index-array       ((Vectorof Integer) -> (Array Index))]
- [indexes-array     ((Vectorof Integer) -> (Array Indexes))])
+ [make-array        (All (A) ((Vectorof Integer) A -> (Array A)))])
 
-(require (except-in "typed-array-constructors.rkt"
-                    make-array
-                    axis-index-array
-                    index-array
-                    indexes-array))
-
-(provide make-array
-         axis-index-array
-         index-array
-         indexes-array
-         diagonal-array)
+(provide make-array)

@@ -1,9 +1,19 @@
 #lang typed/racket
 
-(require racket/fixnum
-         "array-struct.rkt"
-         "../unsafe.rkt"
-         "utils.rkt")
+(require (only-in racket/fixnum fx<= fxmax)
+         (only-in "array-struct.rkt"
+                  Array
+                  array-strict?
+                  array-default-strict
+                  array-shape
+                  array-size
+                  unsafe-array-proc
+                  unsafe-build-array)
+         (only-in "../unsafe.rkt"
+                  unsafe-fxmodulo
+                  unsafe-vector-ref
+                  unsafe-vector-set!)
+         (only-in "typed-utils.rkt" Indexes make-thread-local-indexes))
 
 (provide array-broadcasting
          array-broadcast

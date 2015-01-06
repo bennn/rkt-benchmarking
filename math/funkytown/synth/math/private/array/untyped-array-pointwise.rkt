@@ -5,9 +5,15 @@
 (module syntax-defs racket/base
   (require (for-syntax racket/base)
            typed/racket/base
-           "array-struct.rkt"
-           "array-broadcast.rkt"
-           "utils.rkt")
+           (only-in "array-struct.rkt"
+                    Array
+                    array?
+                    array-shape
+                    array-default-strict
+                    unsafe-array-proc
+                    unsafe-build-array)
+           (only-in "array-broadcast.rkt" array-broadcast array-shape-broadcast)
+           (only-in "utils.rkt" Indexes))
   
   (provide inline-array-map)
   
@@ -46,9 +52,13 @@
 
 (module untyped-defs racket/base
   (require racket/contract
-           "array-struct.rkt"
-           "array-broadcast.rkt"
-           "utils.rkt"
+           (only-in "array-struct.rkt"
+                    array?
+                    array-shape
+                    array-default-strict
+                    unsafe-array-proc
+                    unsafe-build-array)
+           (only-in "array-broadcast.rkt" array-broadcast array-shape-broadcast)
            (submod ".." syntax-defs))
   
   (provide (contract-out

@@ -1,8 +1,13 @@
 #lang typed/racket/base
 
-(require "array-struct.rkt"
-         "array-broadcast.rkt"
-         "utils.rkt"
+(require (only-in "array-struct.rkt"
+                  Array
+                  array-default-strict
+                  array-shape
+                  unsafe-array-proc
+                  unsafe-build-array)
+         (only-in "array-broadcast.rkt" array-broadcast array-shape-broadcast)
+         (only-in "utils.rkt" Indexes)
          (only-in "untyped-array-pointwise.rkt" inline-array-map))
 
 (provide array-map)

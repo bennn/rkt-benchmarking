@@ -2,9 +2,13 @@
 
 (require (for-syntax racket/base
                      syntax/parse)
-         typed/racket/base
-         "mutable-array.rkt"
-         "utils.rkt")
+         (only-in "mutable-array.rkt" unsafe-vector->array)
+         (only-in "typed-utils.rkt" Indexes array-shape-size)
+         (only-in typed/untyped-utils require/untyped-contract)
+         )
+(require/untyped-contract
+ "typed-utils.rkt"
+ [check-array-shape  ((Vectorof Integer) (-> Nothing) -> (Vectorof Index))])
 
 (provide for/array:
          for*/array:

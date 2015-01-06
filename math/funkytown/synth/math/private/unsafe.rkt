@@ -24,19 +24,3 @@
 
 (define unsafe-car car)
 (define unsafe-cdr cdr)
-#|
-(define unsafe-vector-ref :unsafe-vector-ref)
-(define unsafe-vector-set! :unsafe-vector-set!)
-(define unsafe-vector-length :unsafe-vector-length)
-
-(define unsafe-flvector-ref :unsafe-flvector-ref)
-(define unsafe-flvector-set! :unsafe-flvector-set!)
-
-(define unsafe-fx* :unsafe-fx*)
-(define unsafe-fx+ :unsafe-fx+)
-(define unsafe-fxmodulo :unsafe-fxmodulo)
-(define unsafe-fx>= unsafe-fx>=)
-
-(define unsafe-car :unsafe-car)
-(define unsafe-cdr :unsafe-cdr)
-|#

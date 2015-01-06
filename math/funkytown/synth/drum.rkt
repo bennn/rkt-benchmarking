@@ -1,11 +1,13 @@
 #lang racket
 
 (require (only-in "math/array.rkt"
+                  Array
                   array-append*
-                  make-array
                   array-size
                   build-array
-                  for/array)
+                  for/array
+                  make-array)
+         (only-in typed/untyped-utils require/untyped-contract)
          "synth.rkt")
 
 (provide drum)
