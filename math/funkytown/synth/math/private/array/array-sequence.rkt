@@ -1,23 +1,17 @@
 #lang racket/base
 
 (require (for-syntax racket/base)
-         typed/untyped-utils
+         (only-in typed/untyped-utils require/untyped-contract)
          typed-racket/base-env/prims
-         racket/unsafe/ops
-         "array-struct.rkt"
-         "utils.rkt"
-         (except-in "typed-array-sequence.rkt" in-array-indexes))
+         (only-in racket/unsafe/ops unsafe-fx+ unsafe-fx<)
+         (only-in "array-struct.rkt"
+                  array?
+                  array-shape
+                  array-size
+                  unsafe-array-proc)
+         (only-in "utils.rkt" Indexes next-indexes!))
 
-(require/untyped-contract
- "typed-array-sequence.rkt"
- [in-array-indexes  ((Vectorof Integer) -> (Sequenceof (Vectorof Index)))])
-
-(provide (rename-out [in-array-clause  in-array]
-                     [in-array-indexes-clause  in-array-indexes]
-                     [in-unsafe-array-indexes-clause  in-unsafe-array-indexes])
-         in-array-axis
-         array->array-list
-         array-list->array)
+(provide (rename-out [in-array-clause  in-array]))
 
 (define-sequence-syntax in-array-clause
   (λ () #'in-array)
@@ -47,64 +41,3 @@
            [(begin (next-indexes! ds dims js)
                    (unsafe-fx+ j 1))])])]
       [[_ clause] (raise-syntax-error 'in-array "expected (in-array <Array>)" #'clause #'clause)])))
-
-(define-sequence-syntax in-array-indexes-clause
-  (λ () #'in-array-indexes)
-  (λ (stx)
-    (syntax-case stx ()
-      [[(x) (_ ds-expr)]
-       (syntax/loc stx
-         [(x)
-          (:do-in
-           ([(ds size dims js)
-             (let*: ([ds : In-Indexes  ds-expr]
-                     [ds : Indexes  (check-array-shape
-                                     ds (λ () (raise-argument-error 'in-array-indexes "Indexes"
-                                                                         ds)))])
-               (define dims (vector-length ds))
-               (define size (array-shape-size ds))
-               (cond [(index? size)  (define: js : Indexes (make-vector dims 0))
-                                     (values ds size dims js)]
-                     [else  (error 'in-array-indexes
-                                   "array size ~e (for shape ~e) is too large (is not an Index)"
-                                   size ds)]))])
-           (void)
-           ([j 0])
-           (unsafe-fx< j size)
-           ([(x)  (vector-copy-all js)])
-           #true
-           #true
-           [(begin (next-indexes! ds dims js)
-                   (unsafe-fx+ j 1))])])]
-      [[_ clause]
-       (raise-syntax-error 'in-array-indexes "expected (in-array-indexes <Indexes>)"
-                           #'clause #'clause)])))
-
-(define-sequence-syntax in-unsafe-array-indexes-clause
-  (λ () #'in-array-indexes)
-  (λ (stx)
-    (syntax-case stx ()
-      [[(x) (_ ds-expr)]
-       (syntax/loc stx
-         [(x)
-          (:do-in
-           ([(ds size dims js)
-             (let: ([ds : Indexes  ds-expr])
-               (define dims (vector-length ds))
-               (define size (array-shape-size ds))
-               (cond [(index? size)  (define: js : Indexes (make-vector dims 0))
-                                     (values ds size dims js)]
-                     [else  (error 'in-array-indexes
-                                   "array size ~e (for shape ~e) is too large (is not an Index)"
-                                   size ds)]))])
-           (void)
-           ([j 0])
-           (unsafe-fx< j size)
-           ([(x)  js])
-           #true
-           #true
-           [(begin (next-indexes! ds dims js)
-                   (unsafe-fx+ j 1))])])]
-      [[_ clause]
-       (raise-syntax-error 'in-array-indexes "expected (in-unsafe-array-indexes <Indexes>)"
-                           #'clause #'clause)])))
