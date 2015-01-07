@@ -1,157 +1,17 @@
 #lang typed/racket/base
 
 (require racket/vector
-         "../unsafe.rkt"
-         "array-struct.rkt"
-         "array-broadcast.rkt"
-         "utils.rkt")
+         (only-in "../unsafe.rkt" unsafe-vector-ref unsafe-vector-set! unsafe-fx+)
+         (only-in "array-struct.rkt" 
+                  Array
+                  array-shape
+                  unsafe-array-proc
+                  unsafe-build-array
+                  array-default-strict)
+         (only-in "array-broadcast.rkt" array-broadcast array-shape-broadcast)
+         (only-in "utils.rkt" Indexes unsafe-vector-remove vector-copy-all unsafe-vector-insert))         
 
-(provide (all-defined-out))
-
-;; ===================================================================================================
-;; Arbitrary transforms
-
-(: array-transform (All (A) ((Array A) In-Indexes (Indexes -> In-Indexes) -> (Array A))))
-(define (array-transform arr new-ds idx-fun)
-  (define old-ds (array-shape arr))
-  (define old-f (unsafe-array-proc arr))
-  (build-array
-   new-ds (λ: ([js : Indexes])
-            (old-f (check-array-indexes 'array-transform old-ds (idx-fun js))))))
-
-(: unsafe-array-transform (All (A) ((Array A) Indexes (Indexes -> Indexes) -> (Array A))))
-(define (unsafe-array-transform arr new-ds idx-fun)
-  (define old-f (unsafe-array-proc arr))
-  (unsafe-build-array new-ds (λ: ([js : Indexes]) (old-f (idx-fun js)))))
-
-;; ===================================================================================================
-;; Back permutation and swap
-
-(: array-axis-permute (All (A) ((Array A) (Listof Integer) -> (Array A))))
-(define (array-axis-permute arr perm)
-  (define ds (array-shape arr))
-  (let-values ([(ds perm) (apply-permutation
-                           perm ds (λ () (raise-argument-error 'array-axis-permute "permutation"
-                                                               1 arr perm)))])
-    (define dims (vector-length ds))
-    (define old-js (make-thread-local-indexes dims))
-    (array-default-strict
-     (unsafe-array-transform
-      arr ds
-      (λ: ([js : Indexes])
-        (let ([old-js  (old-js)])
-          (let: loop : Indexes ([i : Nonnegative-Fixnum  0])
-            (cond [(i . < . dims)  (unsafe-vector-set! old-js
-                                                       (unsafe-vector-ref perm i)
-                                                       (unsafe-vector-ref js i))
-                                   (loop (+ i 1))]
-                  [else  old-js]))))))))
-
-(: array-axis-swap (All (A) ((Array A) Integer Integer -> (Array A))))
-(define (array-axis-swap arr i0 i1)
-  (define ds (array-shape arr))
-  (define dims (vector-length ds))
-  (cond [(or (i0 . < . 0) (i0 . >= . dims))
-         (raise-argument-error 'array-transpose (format "Index < ~a" dims) 1 arr i0 i1)]
-        [(or (i1 . < . 0) (i1 . >= . dims))
-         (raise-argument-error 'array-transpose (format "Index < ~a" dims) 2 arr i0 i1)]
-        [(= i0 i1)  arr]
-        [else
-         (define new-ds (vector-copy-all ds))
-         (define j0 (unsafe-vector-ref new-ds i0))
-         (define j1 (unsafe-vector-ref new-ds i1))
-         (unsafe-vector-set! new-ds i0 j1)
-         (unsafe-vector-set! new-ds i1 j0)
-         (define proc (unsafe-array-proc arr))
-         (array-default-strict
-          (unsafe-build-array
-           new-ds (λ: ([js : Indexes])
-                    (define j0 (unsafe-vector-ref js i0))
-                    (define j1 (unsafe-vector-ref js i1))
-                    (unsafe-vector-set! js i0 j1)
-                    (unsafe-vector-set! js i1 j0)
-                    (define v (proc js))
-                    (unsafe-vector-set! js i0 j0)
-                    (unsafe-vector-set! js i1 j1)
-                    v)))]))
-
-;; ===================================================================================================
-;; Adding/removing axes
-
-(: array-axis-insert (All (A) (case-> ((Array A) Integer -> (Array A))
-                                      ((Array A) Integer Integer -> (Array A)))))
-(define (array-axis-insert arr k [dk 1])
-  (define ds (array-shape arr))
-  (define dims (vector-length ds))
-  (cond [(or (k . < . 0) (k . > . dims))
-         (raise-argument-error 'array-axis-insert (format "Index <= ~a" dims) 1 arr k dk)]
-        [(not (index? dk))
-         (raise-argument-error 'array-axis-insert "Index" 2 arr k dk)]
-        [else
-         (define new-ds (unsafe-vector-insert ds k dk))
-         (define proc (unsafe-array-proc arr))
-         (array-default-strict
-          (unsafe-build-array new-ds (λ: ([js : Indexes]) (proc (unsafe-vector-remove js k)))))]))
-
-(: array-axis-ref (All (A) ((Array A) Integer Integer -> (Array A))))
-(define (array-axis-ref arr k jk)
-  (define ds (array-shape arr))
-  (define dims (vector-length ds))
-  (cond [(or (k . < . 0) (k . >= . dims))
-         (raise-argument-error 'array-axis-ref (format "Index < ~a" dims) 1 arr k jk)]
-        [(or (jk . < . 0) (jk . >= . (unsafe-vector-ref ds k)))
-         (raise-argument-error 'array-axis-ref (format "Index < ~a" (unsafe-vector-ref ds k))
-                           2 arr k jk)]
-        [else
-         (define new-ds (unsafe-vector-remove ds k))
-         (define proc (unsafe-array-proc arr))
-         (array-default-strict
-          (unsafe-build-array new-ds (λ: ([js : Indexes]) (proc (unsafe-vector-insert js k jk)))))]))
-
-;; ===================================================================================================
-;; Reshape
-
-(: array-reshape (All (A) ((Array A) In-Indexes -> (Array A))))
-(define (array-reshape arr ds)
-  (let ([ds  (check-array-shape
-              ds (λ () (raise-argument-error 'array-reshape "(Vectorof Index)" 1 arr ds)))])
-    (define size (array-size arr))
-    (unless (= size (array-shape-size ds))
-      (raise-argument-error 'array-reshape (format "(Vectorof Index) with product ~a" size) 1 arr ds))
-    (define old-ds (array-shape arr))
-    (cond [(equal? ds old-ds)  arr]
-          [else
-           (define old-dims (vector-length old-ds))
-           (define g (unsafe-array-proc arr))
-           (define old-js (make-thread-local-indexes old-dims))
-           (array-default-strict
-            (unsafe-build-array
-             ds (λ: ([js : Indexes])
-                  (let ([old-js  (old-js)])
-                    (define j (unsafe-array-index->value-index ds js))
-                    (unsafe-value-index->array-index! old-ds j old-js)
-                    (g old-js)))))])))
-
-(: array-flatten (All (A) ((Array A) -> (Array A))))
-(define (array-flatten arr)
-  (define size (array-size arr))
-  (define: ds : Indexes (vector size))
-  (define old-ds (array-shape arr))
-  (cond [(equal? ds old-ds)  arr]
-        [else
-         (define old-dims (vector-length old-ds))
-         (define g (unsafe-array-proc arr))
-         (define old-js (make-thread-local-indexes old-dims))
-         (array-default-strict
-          (unsafe-build-array
-           ds (λ: ([js : Indexes])
-                (let ([old-js  (old-js)])
-                  (define j (unsafe-vector-ref js 0))
-                  (unsafe-value-index->array-index! old-ds j old-js)
-                  (g old-js)))))]))
-
-;; ===================================================================================================
-;; Append
+(provide array-append*)
 
 (: array-broadcast-for-append (All (A) ((Listof (Array A))
                                         Integer -> (Values (Listof (Array A))
