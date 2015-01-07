@@ -1,6 +1,6 @@
 #lang racket/base
 
-(require typed/untyped-utils
+(require (only-in typed/untyped-utils require/untyped-contract)
          typed/racket/base
          (except-in "typed-utils.rkt"
                     check-array-shape))

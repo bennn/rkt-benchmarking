@@ -3,7 +3,6 @@
 (require (only-in "../unsafe.rkt" unsafe-vector-ref unsafe-vector-set!)
          (only-in "array-struct.rkt"
                   Settable-Array
-                  array-custom-printer
                   make-unsafe-array-proc
                   make-unsafe-array-set-proc)
          (only-in "utils.rkt" Indexes))
@@ -13,9 +12,7 @@
 ;; ===================================================================================================
 ;; Mutable array data type
 
-(struct: (A) Mutable-Array Settable-Array ([data : (Vectorof A)])
-  #:property prop:custom-write (λ (arr port mode)
-                                 ((array-custom-printer) arr 'mutable-array port mode)))
+(struct: (A) Mutable-Array Settable-Array ([data : (Vectorof A)]))
 
 (: unsafe-vector->array (All (A) (Indexes (Vectorof A) -> (Mutable-Array A))))
 (define (unsafe-vector->array ds vs)

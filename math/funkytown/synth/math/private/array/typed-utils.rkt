@@ -65,23 +65,8 @@
              (loop (+ i 1) (unsafe-fx+ ji (unsafe-fx* di j)))]
             [else  j])))
   
-  (: unsafe-value-index->array-index! (Indexes Nonnegative-Fixnum Indexes -> Void))
-  (define (unsafe-value-index->array-index! ds j js)
-    (with-asserts ([j index?])
-      (define dims (vector-length ds))
-      (let: loop : Index ([i : Nonnegative-Fixnum  dims] [s : Nonnegative-Fixnum  1])
-        (cond [(zero? i)  j]
-              [else  (let* ([i  (- i 1)]
-                            [j  (loop i (unsafe-fx* s (unsafe-vector-ref ds i)))])
-                       (unsafe-vector-set! js i (fxquotient j s))
-                       (unsafe-fxmodulo j s))]))
-      (void)))
   
   )  ; begin-encourage-inline
-
-;; Using this instead of literal #() is currently slightly faster (about 18% on my machine)
-(define: empty-vectorof-index : Indexes
-  #())
 
 (: raise-array-index-error (Symbol Indexes In-Indexes -> Nothing))
 (define (raise-array-index-error name ds js)
@@ -151,33 +136,6 @@
         (loop i+1))))
   dst-vec)
 
-(: port-next-column (Output-Port -> Natural))
-;; Helper to avoid the annoying #f column value
-(define (port-next-column port)
-  (define-values (_line col _pos) (port-next-location port))
-  (if col col 0))
-
-(: apply-permutation (All (A) ((Listof Integer) Indexes (-> Nothing) -> (Values Indexes Indexes))))
-(define (apply-permutation perm ds fail)
-  (define dims (vector-length ds))
-  (unless (= dims (length perm)) (fail))
-  (define: visited  : (Vectorof Boolean) (make-vector dims #f))
-  (define: new-perm : (Vectorof Index) (make-vector dims 0))
-  (define: new-ds   : Indexes (make-vector dims 0))
-  ;; This loop fails if it writes to a `visited' element twice, or an element of perm is not an
-  ;; Index < dims
-  (let loop ([perm perm] [#{i : Nonnegative-Fixnum} 0])
-    (cond [(i . < . dims)
-           (define k (unsafe-car perm))
-           (cond [(and (0 . <= . k) (k . < . dims))
-                  (cond [(unsafe-vector-ref visited k)  (fail)]
-                        [else  (unsafe-vector-set! visited k #t)])
-                  (unsafe-vector-set! new-ds i (unsafe-vector-ref ds k))
-                  (unsafe-vector-set! new-perm i k)]
-                 [else  (fail)])
-           (loop (unsafe-cdr perm) (+ i 1))]
-          [else  (values new-ds new-perm)])))
-
 (: make-thread-local-indexes (Integer -> (-> Indexes)))
 (define (make-thread-local-indexes dims)
   (let: ([val : (Thread-Cellof (U #f Indexes)) (make-thread-cell #f)])
@@ -185,13 +143,6 @@
               (let: ([v : Indexes  (make-vector dims 0)])
                 (thread-cell-set! val v)
                 v)))))
-
-(: all-equal? (Any Any * -> Boolean))
-(define (all-equal? x . xs)
-  (cond [(empty? xs)  #t]
-        [else  (define first-xs (first xs))
-               (cond [(equal? x first-xs)  (all-equal? first-xs (rest xs))]
-                     [else  #f])]))
 
 (: next-indexes! (Indexes Index Indexes -> Void))
 ;; Sets js to the next vector of indexes, in row-major order

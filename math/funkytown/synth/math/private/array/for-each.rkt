@@ -1,10 +1,14 @@
 #lang typed/racket/base
 
-(require racket/performance-hint
-         "../unsafe.rkt"
-         "utils.rkt")
+(require (only-in "../unsafe.rkt"
+                  unsafe-vector-ref
+                  unsafe-vector-set!
+                  unsafe-fx+
+                  unsafe-fx*)
+         (only-in "utils.rkt" Indexes))
 
-(provide (all-defined-out))
+(provide for-each-array-index
+         inline-build-array-data)
 
 (define-syntax-rule (for-each-array+data-index ds-expr f-expr)
   (let*: ([ds : Indexes  ds-expr]
@@ -39,7 +43,7 @@
          [else  (let: i-loop : Nonnegative-Fixnum ([i : Nonnegative-Fixnum  0]
                                                    [j : Nonnegative-Fixnum  0])
                   (cond [(i . < . dims)
-                         (define: di : Index (unsafe-vector-ref ds i))
+                        (define: di : Index (unsafe-vector-ref ds i))
                          (let: ji-loop : Nonnegative-Fixnum ([ji : Nonnegative-Fixnum  0]
                                                              [j : Nonnegative-Fixnum  j])
                            (cond [(ji . < . di)
