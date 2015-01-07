@@ -3,7 +3,6 @@
 (require typed/untyped-utils
          typed/racket/base
          (for-syntax racket/base syntax/parse)
-         "array-syntax.rkt"
          (except-in "typed-array-struct.rkt"
                     build-array
                     build-simple-array
@@ -44,7 +43,6 @@
  unsafe-list->array
  unsafe-array-proc
  array-lazy
- array
  ;; Settable-Array
  Settable-Array
  settable-array?
@@ -55,14 +53,6 @@
  array-custom-printer
  ;; Misc
  array-lift-comparison)
-
-(define-syntax (array stx)
-  (syntax-parse stx #:literals (:)
-    [(_ e:expr)
-     (syntax/loc stx (array/syntax array list unsafe-list->array e))]
-    [(_ e:expr : T:expr)
-     (syntax/loc stx (array/syntax array (inst list T) unsafe-list->array e))]
-    [_:id  (raise-syntax-error 'array "not allowed as an expression" stx)]))
 
 (define-syntax-rule (array-strict arr-expr)
   (let ([arr arr-expr])
