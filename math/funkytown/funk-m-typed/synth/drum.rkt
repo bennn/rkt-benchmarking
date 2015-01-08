@@ -5,15 +5,10 @@
                   array-append*
                   Array-size
                   for/array
+                  make-array
+                  build-array
                   )
-         (only-in typed/untyped-utils require/untyped-contract)
          "synth.rkt")
-
-(require/untyped-contract
-  (begin (require (only-in "math/private/array/typed-array-struct.rkt" Array)))
-  "math/array.rkt"
-  [make-array  (All (A) (-> (Vectorof Integer) A (Array A)))]
-  [build-array (All (A) (-> (Vectorof Integer) (-> (Vectorof Index) A) (Array A)))])
 
 (provide drum)
 

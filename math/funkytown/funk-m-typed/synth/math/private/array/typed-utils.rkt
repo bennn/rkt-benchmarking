@@ -12,7 +12,7 @@
 (define-type (Vectorof* A) (Rec T (U A (Vectorof T))))
 
 (define-type Indexes (Vectorof Index))
-(define-type In-Indexes (U (Vectorof Integer) Indexes))
+(define-type In-Indexes (Vectorof Integer)) ;(U (Vectorof Integer) Indexes))
 
 (begin-encourage-inline
   

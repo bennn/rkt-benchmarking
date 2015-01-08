@@ -1,13 +1,9 @@
 #lang racket
 
 (require (only-in "math/array.rkt"
+                  build-array
                   array-append*)
-         (only-in typed/untyped-utils require/untyped-contract)
          "synth.rkt" "mixer.rkt")
-(require/untyped-contract
-  (begin (require (only-in "math/private/array/typed-array-struct.rkt" Array)))
-  "math/private/array/typed-array-struct.rkt"
-  [build-array (All (A) (-> (Vectorof Integer) (-> (Vectorof Index) A) (Array A)))])
 
 (provide scale chord note sequence mix)
 
