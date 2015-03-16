@@ -1,0 +1,6 @@
+Num. Contracts	208
+Num. Calls	32725
+Total Runtime	100
+Contract Runtime	11
+Other Runtime	89
+(-> char? string? boolean?)	11

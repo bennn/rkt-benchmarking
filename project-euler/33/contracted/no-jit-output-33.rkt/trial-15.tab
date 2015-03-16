@@ -1,0 +1,9 @@
+Num. Contracts	208
+Num. Calls	32725
+Total Runtime	226
+Contract Runtime	82
+Other Runtime	144
+(-> char? integer?)	30
+(-> exact-positive-integer? (listof integer?))	30
+(-> char? string? boolean?)	11
+(-> (cons/c exact-positive-integer? exact-positive-integer?) boolean?)	11

@@ -1,0 +1,8 @@
+Num. Contracts	9000195
+Num. Calls	141777741
+Total Runtime	715616
+Contract Runtime	364322
+Other Runtime	351294
+(-> nat? nat? nat?)	152024
+(-> nat? nat?)	149827
+(->* () (#:align (or/c (quote left) (quote right) (quote center)) #:left-pad-string non-empty-string? #:limit-marker string? #:max-width (or/c exact-nonnegative-integer? +inf.0) #:min-width exact-nonnegative-integer? #:pad-string non-empty-string? #:right-pad-string non-empty-string? #:separator string? #:width (or/c exact-nonnegative-integer? #f)) #:rest list? string?)	62472

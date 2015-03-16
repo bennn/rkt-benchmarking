@@ -1,0 +1,182 @@
+synth/wav-encode.rkt:36:4: Type Checker: type mismatch
+  expected: Void
+  given: Index
+  in: (write-bytes (integer->integer-bytes i size #f))
+  context...:
+   f44
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:275:0: type-check
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:415:0: tc-module
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+synth/wav-encode.rkt:36:4: Type Checker: type mismatch
+  expected: Void
+  given: Index
+  in: (write-bytes (integer->integer-bytes i size #f))
+  context...:
+   f44
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:275:0: type-check
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:415:0: tc-module
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+synth/wav-encode.rkt:39:4: Type Checker: type mismatch
+  expected: Integer
+  given: Exact-Rational
+  in: (* (sequence-length data) num-channels (/ bits-per-sample 8))
+  context...:
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/utils/tc-utils.rkt:132:12: for-loop
+   f44
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:275:0: type-check
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:415:0: tc-module
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+synth/wav-encode.rkt:65:25: Type Checker: type mismatch
+  expected: Integer
+  given: Flonum
+  in: sample
+  context...:
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/utils/tc-utils.rkt:132:12: for-loop
+   f44
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:275:0: type-check
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:415:0: tc-module
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+synth/wav-encode.rkt:36:4: Type Checker: type mismatch
+  expected: Void
+  given: Index
+  in: (write-bytes (integer->integer-bytes i size #f))
+  context...:
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/utils/tc-utils.rkt:132:12: for-loop
+   f44
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:275:0: type-check
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:415:0: tc-module
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+synth/wav-encode.rkt:36:4: Type Checker: type mismatch
+  expected: Void
+  given: Index
+  in: (write-bytes (integer->integer-bytes i size #f))
+  context...:
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/utils/tc-utils.rkt:132:12: for-loop
+   f44
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:275:0: type-check
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:415:0: tc-module
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+synth/wav-encode.rkt:39:4: Type Checker: type mismatch
+  expected: Integer
+  given: Exact-Rational
+  in: (* (sequence-length data) num-channels (/ bits-per-sample 8))
+  context...:
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/utils/tc-utils.rkt:132:12: for-loop
+   f44
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:275:0: type-check
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:415:0: tc-module
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+synth/wav-encode.rkt:65:25: Type Checker: type mismatch
+  expected: Integer
+  given: Flonum
+  in: sample
+  context...:
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/utils/tc-utils.rkt:132:12: for-loop
+   f44
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:275:0: type-check
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:415:0: tc-module
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+Type Checker: Summary: 8 errors encountered
+  context...:
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:275:0: type-check
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typecheck/tc-toplevel.rkt:415:0: tc-module
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/tc-setup.rkt:39:0: tc-setup
+   /Users/ben/code/racket/fork/racket/share/pkgs/typed-racket-lib/typed-racket/typed-racket.rkt:18:4
+   standard-module-name-resolver

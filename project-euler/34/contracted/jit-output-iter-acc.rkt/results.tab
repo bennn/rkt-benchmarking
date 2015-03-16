@@ -1,0 +1,8 @@
+Num. Samples	50
+Num. Contracts	9000195
+Num. Calls	141777741
+
+Key	Sampled Average	Lower CI 0.95	Upper CI 0.95
+Total Runtime	238054	236701.0	239408.0
+Contract Runtime	166143	165175.0	167111.0
+Other Runtime	71912	71367.0	72456.0

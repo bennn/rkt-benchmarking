@@ -1,0 +1,7 @@
+Num. Contracts	3089
+Num. Calls	1182014
+Total Runtime	30603
+Contract Runtime	6350
+Other Runtime	24252
+(-> positive? positive-stream? positive-stream?)	4059
+(-> (-> positive? boolean?) positive-stream? positive-stream?)	2292

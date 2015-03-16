@@ -1,0 +1,6 @@
+Num. Contracts	9000166
+Num. Calls	8999990
+Total Runtime	334765
+Contract Runtime	65376
+Other Runtime	269390
+(->* () (#:align (or/c (quote left) (quote right) (quote center)) #:left-pad-string non-empty-string? #:limit-marker string? #:max-width (or/c exact-nonnegative-integer? +inf.0) #:min-width exact-nonnegative-integer? #:pad-string non-empty-string? #:right-pad-string non-empty-string? #:separator string? #:width (or/c exact-nonnegative-integer? #f)) #:rest list? string?)	65376

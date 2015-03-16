@@ -1,0 +1,32 @@
+* shootout [0/22]
+    - [ ] ("heapsort" "2500000")
+      - complicated, nested do + return
+    - [ ] ("mandelbrot-generic" "3000")
+    - [ ] ("mandelbrot-futures" "3000")
+    - [ ] ("moments" #f ,(lambda () (mk-moments-input 2000)))
+      - fuck that
+    - [ ] ("nbody" "3000000")
+      - segfault
+    - [ ] ("nbody-generic" "3000000")
+    - [ ] ("nbody-vec" "3000000")
+    - [ ] ("nbody-vec-generic" "3000000")
+    - [ ] ("nestedloop" "33")
+      - contract on macro
+        macro creates nested loops
+        we can just write out the loops
+      - worried about changing semantics
+    - [ ] ("pidigits-gmp" "4000")
+    - [ ] ("regexmatch" #f ,(lambda () (mk-regexmatch-input 1000000)))
+      - hard to make input
+    - [ ] ("regexpdna" #f ,(lambda () (mk-fasta-input 1000000)))
+    - [ ] ("reversecomplement" #f ,(lambda () (mk-fasta-input 30000000)))
+    - [ ] ("k-nucleotide" #f ,(lambda () (mk-fasta-input 500000)))
+    - [ ] ("reversefile" #f ,(lambda () (mk-sumcol-input 3000)))
+    - [ ] ("spellcheck")
+    - [ ] ("spectralnorm" "2000")
+    - [ ] ("spectralnorm-generic" "2000")
+    - [ ] ("sumcol" #f ,(lambda () (mk-sumcol-input 10000)))
+    - [ ] ("thread-ring" "1000000") ; calls exit, so won't display running time
+      - time not working because threads
+    - [ ] ("wc" #f ,(lambda () (mk-sumcol-input 20000)))
+    - [ ] ("wordfreq" #f ,(lambda () (mk-sumcol-input 10000)))
